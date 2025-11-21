@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚀 AI Resume Builder</h1>
+            <p>AI-Powered Resume Optimization with LangChain and LangGraph</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Step Indicator -->
+            <div class="steps">
+                <div class="step active" id="step-1">
+                    <span class="step-number">1</span>
+                    <span>Upload/Enter</span>
+                </div>
+                <div class="step" id="step-2">
+                    <span class="step-number">2</span>
+                    <span>Review</span>
+                </div>
+                <div class="step" id="step-3">
+                    <span class="step-number">3</span>
+                    <span>Enhance</span>
+                </div>
+                <div class="step" id="step-4">
+                    <span class="step-number">4</span>
+                    <span>Download</span>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="upload">📄 Upload Resume</button>
+                <button class="tab-btn" data-tab="manual">✍️ Manual Entry</button>
+            </div>
+
+            <!-- Upload Tab -->
+            <div id="upload-tab" class="tab-content active">
+                <div class="upload-box">
+                    <input type="file" id="file-input" accept=".pdf,.docx" class="file-input">
+                    <label for="file-input" class="upload-label">
+                        <div class="upload-icon">📁</div>
+                        <p>Click to upload or drag PDF/DOCX file</p>
+                        <small>Supported: PDF, DOCX</small>
+                    </label>
+                </div>
+                <button class="btn btn-primary" id="upload-btn" disabled>Upload & Process</button>
+            </div>
+
+            <!-- Manual Entry Tab -->
+            <div id="manual-tab" class="tab-content">
+                <form id="manual-form">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <input type="text" placeholder="Full Name" id="name" required class="form-input">
+                        <input type="email" placeholder="Email" id="email" required class="form-input">
+                        <input type="tel" placeholder="Phone" id="phone" class="form-input">
+                        <input type="text" placeholder="LinkedIn URL" id="linkedin" class="form-input">
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Professional Summary</h3>
+                        <textarea placeholder="Write your professional summary..." id="summary" class="form-textarea" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Experience</h3>
+                        <div id="experience-container">
+                            <div class="form-group">
+                                <input type="text" placeholder="Job Title" class="exp-title form-input">
+                                <input type="text" placeholder="Company" class="exp-company form-input">
+                                <input type="text" placeholder="Duration" class="exp-duration form-input">
+                                <textarea placeholder="Description" class="exp-desc form-textarea" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="addExperience()">+ Add Experience</button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Education</h3>
+                        <div id="education-container">
+                            <div class="form-group">
+                                <input type="text" placeholder="Degree" class="edu-degree form-input">
+                                <input type="text" placeholder="Field of Study" class="edu-field form-input">
+                                <input type="text" placeholder="Institution" class="edu-institution form-input">
+                                <input type="text" placeholder="Year" class="edu-year form-input">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="addEducation()">+ Add Education</button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Skills</h3>
+                        <div id="skills-container">
+                            <input type="text" placeholder="Skill (comma separated)" id="skills-input" class="form-input">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Process Resume</button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden">
+                <div class="results-wrapper">
+                    <!-- ATS Score Display -->
+                    <div class="ats-card">
+                        <h2>ATS Score</h2>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="score-value">--</span>
+                                <span class="score-max">/100</span>
+                            </div>
+                            <div class="score-info">
+                                <p id="score-feedback"></p>
+                                <ul id="improvements-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume Preview -->
+                    <div class="preview-card">
+                        <h2>Resume Preview</h2>
+                        <div id="preview-content" class="preview-content"></div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions">
+                        <button class="btn btn-primary" id="enhance-btn" onclick="enhanceResume()">✨ Enhance with AI</button>
+                        <button class="btn btn-success" id="download-btn" onclick="downloadResume()" disabled>📥 Download Resume</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Processing your resume...</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI Resume Builder © 2025 | Owned by VaibhavRai24</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

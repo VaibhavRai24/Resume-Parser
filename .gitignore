@@ -1,0 +1,5 @@
+/aivenv/
+.env
+*.env
+
+/__pycache__/
